@@ -1,20 +1,28 @@
 package com.example.tasksapplication.models
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Task(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    //@ColumnInfo  (name = "lel")
+    //@Ignore = Keine Variablen werden für dieses Attribut erstellt
     val label: String,
-    val initialIsDone: Boolean = false
+    var isDone: Boolean = false,
+    val categories: List<String> = listOf("house", "garden")
 ) {
-    var isDone by mutableStateOf(initialIsDone)
+    //var isDone by mutableStateOf(initialIsDone)
 }
 
 fun getTasks(): List<Task> {
     return listOf(
-        Task("read a book", false),
-        Task( "learn mad", false),
-        Task( "water the flowers", true)
+        Task(label = "read a book", isDone =  false),
+        Task(label = "learn mad", isDone = false),
+        Task(label = "water the flowers", isDone = true)
     )
 }
